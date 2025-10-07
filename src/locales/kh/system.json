@@ -1,5 +1,6 @@
 {
-  "welcome": "Welcome",
+  "welcomex": "សូមស្វាគមន៍",
+  "homeDescription": "នេះគឺជាទំព័រដើមនៃកម្មវិធីរបស់អ្នក។",
   "login": "Login",
   "logout": "Logout"
 }

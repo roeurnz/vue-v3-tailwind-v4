@@ -1,5 +1,6 @@
 {
-  "welcome": "Welcome",
+  "welcomex": "Welcome",
+  "homeDescription": "This is the home page of your app.",
   "login": "Login",
   "logout": "Logout"
 }

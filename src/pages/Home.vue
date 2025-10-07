@@ -1,12 +1,14 @@
 <template>
-  <div class="container mx-auto p-4 bg-black flex justify-center">
-    <h1 class="text-3xl font-bold text-teal-500">{{ $t('welcome') }}</h1>
-    <p class="mt-4">This is the home page of your app.</p>
+  <div class="container mx-auto p-4 flex justify-center">
+    <div class="flex flex-col h-svh">
+      <h1 class="text-3xl font-bold text-teal-500">{{ $t('welcomex') }}</h1>
+      <p class="mt-4">{{ $t('homeDescription') }}</p>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-// Home page logic (if any) goes here
+// No script logic needed for this component
 </script>
 
 <style scoped>

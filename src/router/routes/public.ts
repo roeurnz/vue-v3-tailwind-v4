@@ -1,7 +1,7 @@
-import Home from '../../pages/Home.vue';
-import About from '../../pages/About.vue';
-import Login from '../../pages/Auth/Login.vue';
-import Register from '../../pages/Auth/Register.vue';
+import Home from '@/pages/Home.vue';
+import About from '@/pages/About.vue';
+import Login from '@/pages/Auth/Login.vue';
+import Register from '@/pages/Auth/Register.vue';
 
 const publicRoutes = [
     {

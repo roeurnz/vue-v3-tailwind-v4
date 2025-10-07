@@ -6,8 +6,8 @@
   }
 
   /* Khmer-specific font support */
-  [lang="km"] {
-    font-family: "Noto Sans Khmer", "Khmer OS", system-ui, sans-serif;
+  [lang="kh"] {
+    font-family: "Moul", "Khmer OS", system-ui, sans-serif;
     line-height: 1.8; /* slightly taller for Khmer readability */
   }
 
@@ -19,6 +19,11 @@
   /* Paragraphs */
   p {
     @apply text-muted-foreground;
+  }
+
+  /* Khmer paragraph font */
+  [lang="kh"] p {
+    font-family: "Battambang", "Khmer OS", system-ui, sans-serif;
   }
 
   /* Links */

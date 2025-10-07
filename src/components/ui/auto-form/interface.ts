@@ -57,16 +57,16 @@ export type Config<SchemaType extends object> = {
       : ConfigItem;
 }
 
-export enum DependencyType {
-  DISABLES,
-  REQUIRES,
-  HIDES,
-  SETS_OPTIONS,
-}
+export const DependencyType = {
+  DISABLES: 'DISABLES',
+  REQUIRES: 'REQUIRES',
+  HIDES: 'HIDES',
+  SETS_OPTIONS: 'SETS_OPTIONS',
+} as const
 
 interface BaseDependency<SchemaType extends z.infer<z.ZodObject<any, any>>> {
   sourceField: keyof SchemaType
-  type: DependencyType
+  type: typeof DependencyType[keyof typeof DependencyType]
   targetField: keyof SchemaType
   when: (sourceFieldValue: any, targetFieldValue: any) => boolean
 }
@@ -74,9 +74,9 @@ interface BaseDependency<SchemaType extends z.infer<z.ZodObject<any, any>>> {
 export type ValueDependency<SchemaType extends z.infer<z.ZodObject<any, any>>> =
   BaseDependency<SchemaType> & {
     type:
-      | DependencyType.DISABLES
-      | DependencyType.REQUIRES
-      | DependencyType.HIDES
+      | typeof DependencyType.DISABLES
+      | typeof DependencyType.REQUIRES
+      | typeof DependencyType.HIDES
   }
 
 export type EnumValues = readonly [string, ...string[]]
@@ -84,7 +84,7 @@ export type EnumValues = readonly [string, ...string[]]
 export type OptionsDependency<
   SchemaType extends z.infer<z.ZodObject<any, any>>,
 > = BaseDependency<SchemaType> & {
-  type: DependencyType.SETS_OPTIONS
+  type: typeof DependencyType.SETS_OPTIONS
 
   // Partial array of values from sourceField that will trigger the dependency
   options: EnumValues

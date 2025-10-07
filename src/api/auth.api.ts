@@ -30,7 +30,7 @@ export const login = async (data: LoginRequest): Promise<LoginResponse> => {
   });
 };
 
-export const register = async (data: RegisterRequest): Promise<void> => {
+export const register = async (_data: RegisterRequest): Promise<void> => {
   // Mock implementation
   return new Promise((resolve) => {
     setTimeout(() => {

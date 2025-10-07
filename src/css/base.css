@@ -1,0 +1,17 @@
+@layer base {
+  html {
+    font-family: "Inter", system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold text-foreground;
+  }
+
+  p {
+    @apply text-muted-foreground;
+  }
+
+  a {
+    @apply text-primary hover:text-primary-foreground transition-colors;
+  }
+}

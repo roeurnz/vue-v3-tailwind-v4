@@ -1,0 +1,39 @@
+@layer base {
+  /* Base font for English & Khmer */
+  html {
+    font-family: "Inter", system-ui, sans-serif;
+    line-height: 1.6;
+  }
+
+  /* Khmer-specific font support */
+  [lang="km"] {
+    font-family: "Noto Sans Khmer", "Khmer OS", system-ui, sans-serif;
+    line-height: 1.8; /* slightly taller for Khmer readability */
+  }
+
+  /* Headings */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold text-foreground;
+  }
+
+  /* Paragraphs */
+  p {
+    @apply text-muted-foreground;
+  }
+
+  /* Links */
+  a {
+    @apply text-primary hover:text-primary-foreground transition-colors;
+  }
+
+  /* Utility for RTL/LTR support if needed */
+  [dir="rtl"] {
+    direction: rtl;
+    text-align: right;
+  }
+
+  [dir="ltr"] {
+    direction: ltr;
+    text-align: left;
+  }
+}

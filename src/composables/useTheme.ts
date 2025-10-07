@@ -1,4 +1,4 @@
-import { ref, onMounted, readonly } from 'vue'
+import { ref, onMounted, onUnmounted, readonly } from 'vue'
 
 export type Theme = 'light' | 'dark' | 'system'
 
@@ -51,12 +51,15 @@ export function useTheme() {
   // Watch for system preference changes
   onMounted(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-    const handleChange = (e: MediaQueryListEvent) => {
+    const handleChange = () => {
       if (theme.value === 'system') {
         updateDocumentClass(getEffectiveTheme('system'))
       }
     }
     mediaQuery.addEventListener('change', handleChange)
+    onUnmounted(() => {
+      mediaQuery.removeEventListener('change', handleChange)
+    })
   })
 
   return {

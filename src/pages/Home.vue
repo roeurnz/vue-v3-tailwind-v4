@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto p-4 space-y-8 bg-background">
+  <div class="container mx-auto p-4 space-y-8 bg-gray-400 h-full">
     <!-- Hero Section -->
     <section class="text-center py-12">
       <h1 class="text-5xl font-bold text-primary kh-moul mb-4">{{ $t('welcomex') }}</h1>

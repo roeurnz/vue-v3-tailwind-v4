@@ -44,6 +44,8 @@
   body {
     overflow-y: scroll;
     width: 100%;
+    /* Ensure no scrollbar affects layout */
+    scrollbar-gutter: stable;
   }
 
   /* Ensure dropdown portals don't affect body scroll */
@@ -63,5 +65,91 @@
     backface-visibility: hidden;
     perspective: 1000px;
     will-change: transform;
+  }
+
+  /* Comprehensive scrollbar hiding solution */
+  .scrollbar-hidden {
+    /* Firefox */
+    scrollbar-width: none;
+
+    /* Internet Explorer 10+ */
+    -ms-overflow-style: none;
+
+    /* Webkit browsers (Chrome, Safari, Edge) */
+    scrollbar-width: 0px;
+    -ms-scrollbar-width: 0px;
+  }
+
+  .scrollbar-hidden::-webkit-scrollbar {
+    /* Completely hide scrollbar in webkit browsers */
+    display: none !important;
+    width: 0px !important;
+    height: 0px !important;
+    background: transparent !important;
+    border: none !important;
+  }
+
+  .scrollbar-hidden::-webkit-scrollbar-track {
+    display: none !important;
+  }
+
+  .scrollbar-hidden::-webkit-scrollbar-thumb {
+    display: none !important;
+  }
+
+  .scrollbar-hidden::-webkit-scrollbar-button {
+    display: none !important;
+  }
+
+  .scrollbar-hidden::-webkit-scrollbar-corner {
+    display: none !important;
+  }
+
+  /* Ensure consistent layout by preventing scrollbar space */
+  .scrollbar-hidden {
+    scrollbar-gutter: stable both-edges;
+    overflow-y: auto; /* Ensure scrolling still works */
+  }
+
+  /* Nuclear option: Completely eliminate all scrollbars globally */
+  * {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+
+  *::-webkit-scrollbar {
+    display: none !important;
+    width: 0px !important;
+    height: 0px !important;
+    background: transparent !important;
+  }
+
+  *::-webkit-scrollbar-track {
+    display: none !important;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    display: none !important;
+  }
+
+  *::-webkit-scrollbar-button {
+    display: none !important;
+  }
+
+  *::-webkit-scrollbar-corner {
+    display: none !important;
+  }
+
+  /* Ensure body and html don't show scrollbars */
+  html, body {
+    overflow-y: auto !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+
+  html::-webkit-scrollbar, body::-webkit-scrollbar {
+    display: none !important;
+    width: 0px !important;
+    height: 0px !important;
   }
 }

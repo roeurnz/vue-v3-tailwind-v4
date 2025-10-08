@@ -1,35 +1,32 @@
-<template>
+r<template>
   <div class="min-h-screen bg-background text-foreground">
     <Navbar />
     <div class="relative h-[calc(100vh-4rem)]">
       <!-- CSS Variables for dynamic sidebar widths -->
-      <div
-        class="contents"
-        :style="{
-          '--left-sidebar-width': leftSidebarWidth + 'px',
-          '--right-sidebar-width': rightSidebarWidth + 'px'
-        }"
-      >
+      <div class="contents" :style="{
+        '--left-sidebar-width': leftSidebarWidth + 'px',
+        '--right-sidebar-width': rightSidebarWidth + 'px'
+      }">
         <!-- Fixed Left Sidebar -->
         <div class="fixed left-0 top-16 z-20" :style="{ width: leftSidebarWidth + 'px', height: 'calc(100vh - 4rem)' }">
           <LeftSidebar @width-change="handleLeftSidebarWidthChange" />
         </div>
 
         <!-- Main Content Area (dynamically adjusted for sidebars) -->
-        <main
-          class="flex-1 relative z-10 min-w-0 transition-all duration-200 ease-in-out"
-          :style="{
-            marginLeft: leftSidebarWidth + 'px',
-            marginRight: rightSidebarWidth + 'px'
-          }"
-        >
+        <main class="flex-1 fixed z-10 min-w-0 transition-all duration-200 ease-in-out" :style="{
+          top: '4rem',
+          left: leftSidebarWidth + 'px',
+          right: rightSidebarWidth + 'px',
+          bottom: '0'
+        }">
           <div class="h-full overflow-auto">
             <router-view />
           </div>
         </main>
 
         <!-- Fixed Right Sidebar -->
-        <div class="fixed right-0 top-16 z-20" :style="{ width: rightSidebarWidth + 'px', height: 'calc(100vh - 4rem)' }">
+        <div class="fixed right-0 top-16 z-20"
+          :style="{ width: rightSidebarWidth + 'px', height: 'calc(100vh - 4rem)' }">
           <Sidebar @width-change="handleRightSidebarWidthChange" />
         </div>
       </div>

@@ -38,7 +38,10 @@
   "showAll": "Show All",
   "showSidebar": "Show Sidebar",
   "hideSidebar": "Hide Sidebar",
-  "hideSidebar": "Hide Sidebar",
+  "collapseSidebar": "Collapse Sidebar",
+  "expandSidebar": "Expand Sidebar",
+  "resizeSidebar": "Resize Sidebar",
+  "sidebarControls": "Controls",
   "login": "Login",
   "logout": "Logout"
 }

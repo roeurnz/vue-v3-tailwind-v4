@@ -31,6 +31,33 @@
     @apply text-primary hover:text-primary-foreground transition-colors;
   }
 
+  /* Font class utilities */
+  .font-english {
+    font-family: "Inter", system-ui, sans-serif;
+  }
+
+  .font-khmer {
+    font-family: "Moul", "Khmer OS", system-ui, sans-serif;
+  }
+
+  /* Specific Khmer font variants */
+  .kh-moul {
+    font-family: "Moul", "Khmer OS", system-ui, sans-serif;
+  }
+
+  .kh-battambang {
+    font-family: "Battambang", "Khmer OS", system-ui, sans-serif;
+  }
+
+  .kh-normal-1 {
+    font-family: "Battambang", "Khmer OS", system-ui, sans-serif;
+  }
+
+  /* English font variants if needed */
+  .en-inter {
+    font-family: "Inter", system-ui, sans-serif;
+  }
+
   /* Utility for RTL/LTR support if needed */
   [dir="rtl"] {
     direction: rtl;

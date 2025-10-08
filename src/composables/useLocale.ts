@@ -1,10 +1,12 @@
-import { onMounted, readonly } from 'vue'
+import { computed, onMounted, readonly } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 type Locale = 'en' | 'kh'
 
 export function useLocale() {
   const { locale } = useI18n()
+
+  const fontClass = computed(() => locale.value === 'kh' ? 'font-khmer' : 'font-english')
 
   const setLocale = (newLocale: Locale) => {
     locale.value = newLocale
@@ -31,6 +33,7 @@ export function useLocale() {
 
   return {
     locale: readonly(locale),
+    fontClass,
     setLocale,
     toggleLocale
   }

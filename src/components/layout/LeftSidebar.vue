@@ -1,12 +1,20 @@
 <template>
   <aside
-    class="bg-card border-r border-border p-4 relative transition-all duration-200 ease-in-out"
-    :class="draggedWidth === 0 ? 'w-0 overflow-hidden' : (isCollapsed ? 'w-16' : 'w-64')"
+    class="bg-card border-r border-border p-4 transition-all duration-200 ease-in-out z-0 overflow-hidden h-full"
+    :class="[
+      draggedWidth === 0 ? 'w-0 overflow-hidden' : (isCollapsed ? 'w-16' : 'w-64'),
+      { 'select-none': isResizing }
+    ]"
     :style="draggedWidth === 0 ? { width: '0px', padding: '0px' } : { width: draggedWidth + 'px' }"
   >
     <!-- Header with Toggle Menu -->
-    <div class="flex items-center justify-between mb-4" v-if="!isCollapsed && draggedWidth > 0">
-      <h3 class="text-sm font-medium">{{ $t('mail') }}</h3>
+    <div class="flex items-center justify-between mb-4 transition-all duration-300 ease-in-out"
+         :class="draggedWidth < 200 ? 'opacity-60' : 'opacity-100'"
+         v-if="!isCollapsed && draggedWidth > 0">
+      <h3 class="text-sm font-medium transition-all duration-200"
+          :class="draggedWidth < 150 ? 'text-xs' : 'text-sm'">
+        {{ $t('mail') }}
+      </h3>
       <DropdownMenu>
         <DropdownMenuTrigger class="p-1 hover:bg-accent rounded">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -51,7 +59,9 @@
     </div>
 
     <!-- Collapsed Header -->
-    <div class="flex justify-center mb-4" v-if="isCollapsed && draggedWidth > 0">
+    <div class="flex justify-center mb-4 transition-all duration-300 ease-in-out"
+         :class="isResizing ? 'scale-110' : 'scale-100'"
+         v-if="isCollapsed && draggedWidth > 0">
       <DropdownMenu>
         <DropdownMenuTrigger class="p-2 hover:bg-accent rounded">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -96,11 +106,24 @@
     </div>
 
     <!-- Resize Handle -->
+     <div
+       class="absolute right-0 top-0 bottom-0 w-0.5 cursor-col-resize transition-all duration-200 z-20 hover:w-1"
+       :class="[
+         isResizing
+           ? 'bg-primary w-1.5'
+           : 'bg-border hover:bg-primary'
+       ]"
+       @mousedown="startResize"
+       @dblclick="toggleCollapse"
+     ></div>
+
+    <!-- Resize Width Indicator -->
     <div
-      class="absolute right-0 top-0 bottom-0 w-1 bg-border cursor-col-resize hover:bg-primary transition-colors"
-      @mousedown="startResize"
-      @dblclick="toggleCollapse"
-    ></div>
+      v-if="isResizing && draggedWidth > 64"
+      class="absolute top-4 right-4 bg-primary/90 text-primary-foreground text-xs px-2 py-1 rounded shadow-lg z-30 transition-all duration-100"
+    >
+      {{ Math.round(draggedWidth) }}px
+    </div>
 
     <!-- Floating Expand Button (when completely hidden) -->
     <div
@@ -121,74 +144,104 @@
     <nav class="space-y-1" v-if="!hideApps && draggedWidth > 0">
       <router-link
         to="/"
-        class="flex items-center rounded hover:bg-accent text-sm transition-all"
-        :class="isCollapsed ? 'justify-center px-2 py-3 gap-0' : 'gap-3 px-3 py-2'"
+        class="flex items-center rounded hover:bg-accent text-sm transition-all duration-200"
+        :class="getMenuItemClasses()"
         :title="isCollapsed ? $t('inbox') : ''"
       >
         <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"></path>
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5a2 2 0 012-2h4a2 2 0 012 2v2H8V5z"></path>
         </svg>
-        <span v-if="!isCollapsed">{{ $t('inbox') }}</span>
+        <span v-if="!isCollapsed" class="truncate">{{ $t('inbox') }}</span>
       </router-link>
       <router-link
         to="/solutions"
-        class="flex items-center rounded hover:bg-accent text-sm transition-all"
-        :class="isCollapsed ? 'justify-center px-2 py-3 gap-0' : 'gap-3 px-3 py-2'"
+        class="flex items-center rounded hover:bg-accent text-sm transition-all duration-200"
+        :class="getMenuItemClasses()"
         :title="isCollapsed ? $t('sent') : ''"
       >
         <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
         </svg>
-        <span v-if="!isCollapsed">{{ $t('sent') }}</span>
+        <span v-if="!isCollapsed" class="truncate">{{ $t('sent') }}</span>
       </router-link>
       <router-link
         to="/tools"
-        class="flex items-center rounded hover:bg-accent text-sm transition-all"
-        :class="isCollapsed ? 'justify-center px-2 py-3 gap-0' : 'gap-3 px-3 py-2'"
+        class="flex items-center rounded hover:bg-accent text-sm transition-all duration-200"
+        :class="getMenuItemClasses()"
         :title="isCollapsed ? $t('drafts') : ''"
       >
         <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
         </svg>
-        <span v-if="!isCollapsed">{{ $t('drafts') }}</span>
+        <span v-if="!isCollapsed" class="truncate">{{ $t('drafts') }}</span>
       </router-link>
       <router-link
         to="/about"
-        class="flex items-center rounded hover:bg-accent text-sm transition-all"
-        :class="isCollapsed ? 'justify-center px-2 py-3 gap-0' : 'gap-3 px-3 py-2'"
+        class="flex items-center rounded hover:bg-accent text-sm transition-all duration-200"
+        :class="getMenuItemClasses()"
         :title="isCollapsed ? $t('trash') : ''"
       >
         <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
         </svg>
-        <span v-if="!isCollapsed">{{ $t('trash') }}</span>
+        <span v-if="!isCollapsed" class="truncate">{{ $t('trash') }}</span>
       </router-link>
     </nav>
 
     <!-- Folders Pane (Labels Section) -->
-    <div class="mt-8" v-if="!hideFolders && !isCollapsed && draggedWidth > 0">
-      <h4 class="text-sm font-medium mb-2 text-muted-foreground">{{ $t('labels') }}</h4>
+    <div class="mt-8 transition-all duration-300 ease-in-out" v-if="!hideFolders && !isCollapsed && draggedWidth > 0">
+      <h4 class="text-sm font-medium mb-2 text-muted-foreground transition-opacity duration-200"
+          :class="draggedWidth < 150 ? 'opacity-0' : 'opacity-100'">
+        {{ $t('labels') }}
+      </h4>
       <ul class="space-y-1 text-sm">
-        <li><a href="#" class="flex items-center gap-2 text-muted-foreground hover:text-foreground">
-          <div class="w-3 h-3 bg-red-500 rounded"></div>{{ $t('work') }}</a></li>
-        <li><a href="#" class="flex items-center gap-2 text-muted-foreground hover:text-foreground">
-          <div class="w-3 h-3 bg-blue-500 rounded"></div>{{ $t('personal') }}</a></li>
-        <li><a href="#" class="flex items-center gap-2 text-muted-foreground hover:text-foreground">
-          <div class="w-3 h-3 bg-green-500 rounded"></div>{{ $t('important') }}</a></li>
+        <li><a href="#" class="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-all duration-200 rounded px-1 py-1 hover:bg-accent/50"
+               :class="draggedWidth < 120 ? 'justify-center px-1' : 'justify-start px-2'">
+          <div class="w-3 h-3 bg-red-500 rounded flex-shrink-0"></div>
+          <span v-if="draggedWidth >= 120" class="truncate">{{ $t('work') }}</span></a></li>
+        <li><a href="#" class="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-all duration-200 rounded px-1 py-1 hover:bg-accent/50"
+               :class="draggedWidth < 120 ? 'justify-center px-1' : 'justify-start px-2'">
+          <div class="w-3 h-3 bg-blue-500 rounded flex-shrink-0"></div>
+          <span v-if="draggedWidth >= 120" class="truncate">{{ $t('personal') }}</span></a></li>
+        <li><a href="#" class="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-all duration-200 rounded px-1 py-1 hover:bg-accent/50"
+               :class="draggedWidth < 120 ? 'justify-center px-1' : 'justify-start px-2'">
+          <div class="w-3 h-3 bg-green-500 rounded flex-shrink-0"></div>
+          <span v-if="draggedWidth >= 120" class="truncate">{{ $t('important') }}</span></a></li>
       </ul>
     </div>
   </aside>
+
+  <!-- Floating Expand Button (when completely hidden) -->
+  <div
+    v-if="draggedWidth === 0"
+    class="fixed left-0 top-1/2 transform -translate-y-1/2 z-50"
+  >
+    <button
+      @click="restoreSidebar"
+      class="bg-primary text-primary-foreground p-2 rounded-r-md shadow-lg hover:bg-primary/90 transition-colors"
+      :title="$t('showSidebar')"
+    >
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path>
+      </svg>
+    </button>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onUnmounted } from 'vue'
+import { ref, onUnmounted, watch } from 'vue'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+
+// Define emits
+const emit = defineEmits<{
+  widthChange: [width: number]
+}>()
 
 const isCollapsed = ref(false)
 const draggedWidth = ref(256) // Default width
@@ -282,6 +335,26 @@ const restoreSidebar = () => {
   hideFolders.value = false // Show folders pane
   console.log('Sidebar restored')
 }
+
+// Get responsive menu item classes based on sidebar width
+const getMenuItemClasses = () => {
+  const width = draggedWidth.value
+  if (width <= 80) {
+    return 'justify-center px-2 py-3 gap-0'
+  } else if (width <= 150) {
+    return 'justify-start px-2 py-2 gap-2'
+  } else if (width <= 220) {
+    return 'justify-start px-3 py-2 gap-3'
+  } else {
+    return 'justify-start px-4 py-2 gap-3'
+  }
+}
+
+// Watch for width changes and emit to parent
+watch(draggedWidth, (newWidth) => {
+  const currentWidth = newWidth > 0 ? newWidth : 0
+  emit('widthChange', currentWidth)
+}, { immediate: true })
 
 // Cleanup event listeners
 onUnmounted(() => {

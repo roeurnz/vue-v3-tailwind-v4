@@ -1,8 +1,8 @@
 <template>
   <div class="container mx-auto p-4">
     <div class="flex flex-col">
-      <h1 class="text-3xl text-teal-500 kh-moul">{{ $t('welcomex') }}</h1>
-      <p class="mt-4 kh-normal-1">{{ $t('homeDescription') }}</p>
+      <h1 class="text-3xl text-teal-500 kh-moul">{{ $t('toolsTitle') }}</h1>
+      <p class="mt-4 kh-normal-1">{{ $t('toolsDescription') }}</p>
     </div>
   </div>
 </template>

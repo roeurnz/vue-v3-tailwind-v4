@@ -6,7 +6,7 @@
 
 ## [3.0.0] - 2025-08-18
 
-- Mosaic Redesign
+- Sinctuze Redesign
 
 ## [2.1.0] - 2025-08-18
 

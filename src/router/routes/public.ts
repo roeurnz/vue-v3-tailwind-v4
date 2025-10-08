@@ -1,5 +1,7 @@
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
 import Home from '@/pages/Home.vue';
+import Solutions from '@/pages/Solutions.vue';
+import Tools from '@/pages/Tools.vue';
 import About from '@/pages/About.vue';
 import Login from '@/pages/Auth/Login.vue';
 import Register from '@/pages/Auth/Register.vue';
@@ -15,6 +17,22 @@ const publicRoutes = [
                 component: Home,
                 meta: {
                     title: 'Home'
+                }
+            },
+            {
+                path: 'solutions',
+                name: 'Solutions',
+                component: Solutions,
+                meta: {
+                    title: 'Solutions'
+                }
+            },
+            {
+                path: 'tools',
+                name: 'Tools',
+                component: Tools,
+                meta: {
+                    title: 'Tools'
                 }
             },
             {

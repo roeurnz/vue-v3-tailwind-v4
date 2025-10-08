@@ -1,8 +1,8 @@
 <template>
-  <div class="container mx-auto p-4 space-y-8">
+  <div class="container mx-auto p-4 space-y-8 bg-background">
     <!-- Hero Section -->
     <section class="text-center py-12">
-      <h1 class="text-5xl font-bold text-teal-500 kh-moul mb-4">{{ $t('welcomex') }}</h1>
+      <h1 class="text-5xl font-bold text-primary kh-moul mb-4">{{ $t('welcomex') }}</h1>
       <p class="text-xl text-muted-foreground kh-normal-1 max-w-2xl mx-auto">{{ $t('homeDescription') }}</p>
     </section>
 
@@ -10,7 +10,7 @@
     <article class="prose prose-lg max-w-none dark:prose-invert">
       <!-- Section 1 -->
       <section class="mb-12">
-        <h2 class="text-3xl font-semibold mb-6 text-teal-600 border-b pb-2">Getting Started with Modern Web Development</h2>
+        <h2 class="text-3xl font-semibold mb-6 text-primary border-b border-border pb-2">Getting Started with Modern Web Development</h2>
         <p class="mb-4 text-foreground/90 leading-relaxed">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -32,7 +32,7 @@
 
       <!-- Section 2 -->
       <section class="mb-12">
-        <h2 class="text-3xl font-semibold mb-6 text-teal-600 border-b pb-2">Building Responsive User Interfaces</h2>
+        <h2 class="text-3xl font-semibold mb-6 text-primary border-b border-border pb-2">Building Responsive User Interfaces</h2>
         <p class="mb-4 text-foreground/90 leading-relaxed">
           At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque
           corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa
@@ -52,7 +52,7 @@
 
       <!-- Section 3 -->
       <section class="mb-12">
-        <h2 class="text-3xl font-semibold mb-6 text-teal-600 border-b pb-2">Advanced State Management Patterns</h2>
+        <h2 class="text-3xl font-semibold mb-6 text-primary border-b border-border pb-2">Advanced State Management Patterns</h2>
         <p class="mb-4 text-foreground/90 leading-relaxed">
           On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by
           the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are
@@ -74,7 +74,7 @@
 
       <!-- Section 4 -->
       <section class="mb-12">
-        <h2 class="text-3xl font-semibold mb-6 text-teal-600 border-b pb-2">Performance Optimization Techniques</h2>
+        <h2 class="text-3xl font-semibold mb-6 text-primary border-b border-border pb-2">Performance Optimization Techniques</h2>
         <p class="mb-4 text-foreground/90 leading-relaxed">
           Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because
           occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example,
@@ -96,7 +96,7 @@
 
       <!-- Section 5 -->
       <section class="mb-12">
-        <h2 class="text-3xl font-semibold mb-6 text-teal-600 border-b pb-2">Testing and Quality Assurance</h2>
+        <h2 class="text-3xl font-semibold mb-6 text-primary border-b border-border pb-2">Testing and Quality Assurance</h2>
         <p class="mb-4 text-foreground/90 leading-relaxed">
           At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque
           corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa
@@ -117,7 +117,7 @@
 
       <!-- Section 6 -->
       <section class="mb-12">
-        <h2 class="text-3xl font-semibold mb-6 text-teal-600 border-b pb-2">Deployment and DevOps Best Practices</h2>
+        <h2 class="text-3xl font-semibold mb-6 text-primary border-b border-border pb-2">Deployment and DevOps Best Practices</h2>
         <p class="mb-4 text-foreground/90 leading-relaxed">
           On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by
           the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are
@@ -138,7 +138,7 @@
 
       <!-- Conclusion Section -->
       <section class="mb-12">
-        <h2 class="text-3xl font-semibold mb-6 text-teal-600 border-b pb-2">Conclusion</h2>
+        <h2 class="text-3xl font-semibold mb-6 text-primary border-b border-border pb-2">Conclusion</h2>
         <p class="mb-4 text-foreground/90 leading-relaxed">
           In conclusion, modern web development requires a comprehensive understanding of various technologies, frameworks,
           and best practices. From building responsive user interfaces to implementing robust state management, performance

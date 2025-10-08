@@ -28,4 +28,40 @@
   a {
     @apply text-primary hover:text-primary-foreground transition-colors;
   }
+
+  /* Prevent layout shift for dropdown menus */
+  .dropdown-stable {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  /* Maintain scrollbar stability when dropdowns open */
+  html {
+    overflow-y: scroll;
+  }
+
+  body {
+    overflow-y: scroll;
+    width: 100%;
+  }
+
+  /* Ensure dropdown portals don't affect body scroll */
+  [data-reka-popper-content-wrapper] {
+    position: fixed !important;
+  }
+
+  /* Prevent dropdown scrollbar from affecting document layout */
+  .scrollbar-stable {
+    scrollbar-gutter: stable;
+    overflow-y: auto;
+  }
+
+  /* Maintain consistent width when scrollbars appear/disappear */
+  .dropdown-stable {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    will-change: transform;
+  }
 }

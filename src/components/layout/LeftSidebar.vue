@@ -105,25 +105,14 @@
       </DropdownMenu>
     </div>
 
-    <!-- Resize Handle -->
+    <!-- Resize Handle (Invisible) -->
      <div
-       class="absolute right-0 top-0 bottom-0 w-0.5 cursor-col-resize transition-all duration-200 z-20 hover:w-1"
-       :class="[
-         isResizing
-           ? 'bg-primary w-1.5'
-           : 'bg-border hover:bg-primary'
-       ]"
+       class="absolute right-0 top-0 bottom-0 w-1 cursor-col-resize z-20"
+       style="background: transparent;"
        @mousedown="startResize"
        @dblclick="toggleCollapse"
      ></div>
 
-    <!-- Resize Width Indicator -->
-    <div
-      v-if="isResizing && draggedWidth > 64"
-      class="absolute top-4 right-4 bg-primary/90 text-primary-foreground text-xs px-2 py-1 rounded shadow-lg z-30 transition-all duration-100"
-    >
-      {{ Math.round(draggedWidth) }}px
-    </div>
 
     <!-- Floating Expand Button (when completely hidden) -->
     <div

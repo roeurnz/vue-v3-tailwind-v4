@@ -83,6 +83,8 @@
             </path>
           </svg>
         </a>
+        <!-- Theme Switcher -->
+        <ThemeSwitcher />
       </div>
     </aside>
   </div>
@@ -90,6 +92,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
+import ThemeSwitcher from '@/components/base/ThemeSwitcher.vue'
 
 const isCollapsed = ref(false)
 

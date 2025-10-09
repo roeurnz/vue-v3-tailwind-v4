@@ -34,14 +34,12 @@
       </nav>
       <div class="flex items-center gap-2">
         <LanguageSwitcher />
-        <ThemeSwitcher />
       </div>
     </div>
   </header>
 </template>
 
 <script setup lang="ts">
-import ThemeSwitcher from '@/components/base/ThemeSwitcher.vue'
 import LanguageSwitcher from '@/components/base/LanguageSwitcher.vue'
 import {
   DropdownMenu,

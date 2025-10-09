@@ -1,4 +1,4 @@
-r<template>
+<template>
   <div class="min-h-screen bg-background text-foreground">
     <Navbar />
     <div class="relative h-[calc(100vh-4rem)]">
